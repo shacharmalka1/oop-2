@@ -1,12 +1,13 @@
+const { v4: uuidv4 } = require("uuid");
 class ClassicGuitar {
   #id;
-  constructor(manufactureYear, brand, price, numberOfString = 6, id) {
+  constructor(manufactureYear, brand, price, numberOfString = 6) {
     this.manufactureYear = manufactureYear;
     this.brand = brand;
     this.price = price;
     this.numberOfString = numberOfString;
     this.used = false;
-    this.#id = id;
+    this.#id = uuidv4();
   }
   play() {
     console.log("🎶🎶🎶");
@@ -41,8 +42,8 @@ class ClassicGuitar {
 }
 
 class ElectricGuitar extends ClassicGuitar {
-  constructor(manufactureYear, brand, price, numberOfString = 6, id, longNeck) {
-    super(manufactureYear, brand, price, (numberOfString = 6), id);
+  constructor(manufactureYear, brand, price, numberOfString = 6, longNeck) {
+    super(manufactureYear, brand, price, (numberOfString = 6));
     this.longNeck = longNeck;
   }
   play() {
@@ -53,8 +54,8 @@ class ElectricGuitar extends ClassicGuitar {
 }
 
 class BassGuitar extends ClassicGuitar {
-  constructor(manufactureYear, brand, price, numberOfString, id) {
-    super(manufactureYear, brand, price, (numberOfString = 4), id);
+  constructor(manufactureYear, brand, price, numberOfString) {
+    super(manufactureYear, brand, price, (numberOfString = 4));
   }
   play() {
     this.used = true;
@@ -68,3 +69,13 @@ class BassGuitar extends ClassicGuitar {
     return list;
   }
 }
+
+let bass = new BassGuitar("1971", "fender", "3899", 6);
+console.log(bass);
+bass.play();
+console.log(bass.getId);
+
+let electric = new ElectricGuitar("1971", "fender", "3899", 6, 99);
+console.log(electric);
+electric.play();
+console.log(electric.getId);
