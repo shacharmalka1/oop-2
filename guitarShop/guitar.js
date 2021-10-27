@@ -1,4 +1,7 @@
-const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const usersPath = `C:/dev/cyber4s/oop-2/guitarShop/guitarCollection`;
+const guitarsArray = fs.readdirSync(usersPath);
+
 class ClassicGuitar {
   #id;
   constructor(manufactureYear, brand, price, numberOfString = 6) {
@@ -7,7 +10,7 @@ class ClassicGuitar {
     this.price = price;
     this.numberOfString = numberOfString;
     this.used = false;
-    this.#id = uuidv4();
+    this.#id = guitarsArray + 1;
   }
   play() {
     console.log("🎶🎶🎶");
@@ -43,7 +46,7 @@ class ClassicGuitar {
 
 class ElectricGuitar extends ClassicGuitar {
   constructor(manufactureYear, brand, price, numberOfString = 6, longNeck) {
-    super(manufactureYear, brand, price, (numberOfString = 6));
+    super(manufactureYear, brand, price, numberOfString);
     this.longNeck = longNeck;
   }
   play() {
@@ -54,8 +57,8 @@ class ElectricGuitar extends ClassicGuitar {
 }
 
 class BassGuitar extends ClassicGuitar {
-  constructor(manufactureYear, brand, price, numberOfString) {
-    super(manufactureYear, brand, price, (numberOfString = 4));
+  constructor(manufactureYear, brand, price, numberOfString = 4) {
+    super(manufactureYear, brand, price, numberOfString);
   }
   play() {
     this.used = true;
